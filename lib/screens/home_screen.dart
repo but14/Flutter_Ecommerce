@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:woshoesapp/screens/product_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   List categories = ["All", "Nike", "Adidas", "MLB", "Puma"];
@@ -8,9 +9,13 @@ class HomeScreen extends StatelessWidget {
     "images/p2.jpg",
     "images/p3.jpg",
     "images/p4.jpg",
+    "images/image5.jpg",
+    "images/p3.jpg",
+    "images/p3.jpg",
+    "images/p3.jpg",
   ];
 
-  List productTItles = [
+  List productTitles = [
     "Adidas New",
     "Nike New",
     "MLB New",
@@ -150,40 +155,220 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Featured Products",
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
                 Container(
-                  color: Colors.red,
-                  height: 200,
+                  height: 280,
                   child: ListView.builder(
                       itemCount: imageList.length,
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         return Container(
+                          margin: EdgeInsets.only(right: 15),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(
-                                height: 200,
+                                height: 150,
+                                width: 150,
                                 child: Stack(
                                   children: [
                                     InkWell(
-                                      onTap: () {},
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ProductScreen()),
+                                        );
+                                      },
                                       child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(20),
-                                        child: Image.asset(imageList[index]),
-
-                                        ///continue 14:15
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Image.asset(
+                                          imageList[index],
+                                          fit: BoxFit.cover,
+                                          height: 150,
+                                          width: 150,
+                                        ),
                                       ),
-                                    )
+                                    ),
+                                    Positioned(
+                                      right: 10,
+                                      top: 10,
+                                      child: Container(
+                                        height: 30,
+                                        width: 30,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                        child: Center(
+                                          child: Icon(
+                                            Icons.favorite,
+                                            color: Color(0xFFDB3022),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
-                              )
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                productTitles[index],
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 3,
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                    size: 22,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    prices[index],
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFFDB3022),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         );
                       }),
                 ),
+                SizedBox(
+                  height: 5,
+                ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Coming Products",
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                GridView.builder(
+                    itemCount: productTitles.length,
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.6,
+                      //crossAxisSpacing: 40,
+                    ),
+                    itemBuilder: (context, index) {
+                      return Container(
+                        width: 200,
+                        margin: EdgeInsets.only(right: 15),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 180,
+                              child: Stack(
+                                children: [
+                                  InkWell(
+                                    onTap: () {},
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.asset(
+                                        imageList[index],
+                                        width: 200,
+                                        fit: BoxFit.cover,
+                                        //height: 200,
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    right: 10,
+                                    top: 10,
+                                    child: Container(
+                                      height: 30,
+                                      width: 30,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      child: Center(
+                                        child: Icon(
+                                          Icons.favorite,
+                                          color: Color(0xFFDB3022),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              productTitles[index],
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 3,
+                            ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.star,
+                                  color: Colors.amber,
+                                  size: 22,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  prices[index],
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFFDB3022),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    }),
               ],
             ),
           ),
